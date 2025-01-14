@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <script src="calendar.js" defer></script>
+    <link rel="stylesheet" href="CSS/plannerstyle.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+</head>
+<body>
+
+    <button id="addEventButton">+ Voeg Toe</button>
+
+    <div id='calendar'></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridDay',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    {
+                        title: 'Homework 1',
+                        start: '2024-10-15T10:00:00',
+                        end: '2024-10-15T11:00:00'
+                    }
+                ]
+            });
+
+            calendar.render();
+
+            // Add event listener for the button
+            document.getElementById('addEventButton').addEventListener('click', function() {
+                // Prompt user for event details
+                var eventTitle = prompt('Enter event title:');
+                var eventHour = prompt('Enter event hour (1-12):');
+                var eventMinute = prompt('Enter event minute (00-59):');
+                var amPm = prompt('Enter AM or PM:').toUpperCase();
+
+                if (eventTitle && eventHour && eventMinute && (amPm === 'AM' || amPm === 'PM')) {
+                    // Get the currently displayed date
+                    var currentDate = calendar.getDate();
+
+                    // Convert hour to 24-hour format
+                    eventHour = parseInt(eventHour, 10);
+                    if (amPm === 'PM' && eventHour !== 12) {
+                        eventHour += 12; // Convert PM hour to 24-hour format
+                    } else if (amPm === 'AM' && eventHour === 12) {
+                        eventHour = 0; // Convert 12 AM to 0 hours
+                    }
+
+                    // Create the full date-time string
+                    var eventDateTime = currentDate.toISOString().split('T')[0] + 'T' + 
+                                        String(eventHour).padStart(2, '0') + ':' + 
+                                        String(eventMinute).padStart(2, '0') + ':00';
+
+                    // Add event to the calendar
+                    calendar.addEvent({
+                        title: eventTitle,
+                        start: eventDateTime
+                    });
+                } else {
+                    alert('Event creation canceled. Please provide valid inputs.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

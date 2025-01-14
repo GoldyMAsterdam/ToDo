@@ -1,0 +1,26 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .fc-day {
+    background-color: #CDCBCB;
+  }
+  .fc-event{
+    background-color:  #1E90FF;
+  }
+  .fc-timegrid-slot.fc-timegrid-slot-lane {
+    background-color: black;
+    padding: 20px;
+  }
+  .fc-day.fc-day-tue.fc-day-today.fc-daygrid-day{
+    background-color: white;
+  }
