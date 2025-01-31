@@ -12,7 +12,7 @@ todoForm.addEventListener('submit', function (e) {
 
 function addTodo() {
     const todoText = todoInput.value.trim();
-    if (todoText.length > 0) { 
+    if (todoText.length > 0) {
         const todoObject = {
             text: todoText,
             completed: false

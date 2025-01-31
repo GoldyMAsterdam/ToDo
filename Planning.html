@@ -35,32 +35,29 @@
 
             calendar.render();
 
-            // Add event listener for the button
             document.getElementById('addEventButton').addEventListener('click', function() {
-                // Prompt user for event details
+                
                 var eventTitle = prompt('Enter event title:');
                 var eventHour = prompt('Enter event hour (1-12):');
                 var eventMinute = prompt('Enter event minute (00-59):');
                 var amPm = prompt('Enter AM or PM:').toUpperCase();
 
                 if (eventTitle && eventHour && eventMinute && (amPm === 'AM' || amPm === 'PM')) {
-                    // Get the currently displayed date
+            
                     var currentDate = calendar.getDate();
 
-                    // Convert hour to 24-hour format
+                
                     eventHour = parseInt(eventHour, 10);
                     if (amPm === 'PM' && eventHour !== 12) {
-                        eventHour += 12; // Convert PM hour to 24-hour format
+                        eventHour += 12; 
                     } else if (amPm === 'AM' && eventHour === 12) {
-                        eventHour = 0; // Convert 12 AM to 0 hours
+                        eventHour = 0;
                     }
 
-                    // Create the full date-time string
                     var eventDateTime = currentDate.toISOString().split('T')[0] + 'T' + 
                                         String(eventHour).padStart(2, '0') + ':' + 
                                         String(eventMinute).padStart(2, '0') + ':00';
 
-                    // Add event to the calendar
                     calendar.addEvent({
                         title: eventTitle,
                         start: eventDateTime
